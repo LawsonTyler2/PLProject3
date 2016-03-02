@@ -86,26 +86,174 @@ var employee = function(p){
 $(document).ready(function() {
     //When start creating button is clicked, determine whether to create customer or employee
     $("#create_person").click(function(){
-        if($("#create_type").val() == "c" ){
-            $("#customer").toggleClass("hide");
+        //Customer
+        if($("#create_type").val() == "c" || $("#create_type").val() == "customer" || $("#create_type").val() == "Customer"){
+            if ( $("#customer").hasClass("hide") == true){
+                $("#customer").toggleClass("hide");
+            }
             if ( $("#employee").hasClass("hide") != true){
                 $("#employee").toggleClass("hide");
             }
 
             $("#customer_typeError").text("*");
 
-        }
-        else if($("#create_type").val() == "e" ){
-            $("#employee").toggleClass("hide");
+        }//Employee
+        else if($("#create_type").val() == "e" || $("#create_type").val() == "employee" || $("#create_type").val() == "Employee"){
+            if ( $("#employee").hasClass("hide") == true){
+                $("#employee").toggleClass("hide");
+            }
             if ( $("#customer").hasClass("hide") != true){
                 $("#customer").toggleClass("hide");
             }
 
             $("#customer_typeError").text("*");
 
-        }
+        }//nothing --- error
         else {
             $("#customer_typeError").text("This field is required.");
+        }
+        //Clear Inputs
+        $("#eFirstName").val("");
+        $("#eLastName").val("");
+        $("#eEmail").val("");
+        $("#ssn").val("");
+        $("#cFirstName").val("");
+        $("#cLastName").val("");
+        $("#cEmail").val("");
+        $("#cCustomerNumber").val("");
+
+
+    })
+    $("#createCustomer").click(function() {
+
+        var cFirstName = $("#cFirstName").val();
+        var cLastName = $("#cLastName").val();
+        var cEmail = $("#cEmail").val();
+        var cCustomerNumber = $("#cCustomerNumber").val();
+
+        var isValid = true;
+
+        // validate the first name
+        if (cFirstName == "") {
+            $("#cFirstNameError").text("This field is required.");
+            isValid = false;
+        } else {
+            $("#cFirstNameError").text("*");
+        }
+
+        // validate the last Name
+        if (cLastName == "") {
+            $("#cLastNameError").text("This field is required.");
+            isValid = false;
+        } else {
+            $("#cLastNameError").text("*");
+        }
+
+        // validate the email
+        if (cEmail == "") {
+            $("#cEmailError").text("This field is required.");
+            isValid = false;
+        }
+        else {
+            $("#cEmailError").text("*");
+        }
+        // validate the Customer Number
+        if (cCustomerNumber == "") {
+            $("#cCustomerNumberError").text("This field is required.");
+            isValid = false;
+        }
+        else {
+            $("#cCustomerNumberError").text("*");
+        }
+
+
+
+
+
+
+        if (isValid == true) {
+            var custCustomer = Object.create(customer)
+            custCustomer.run('$firstName')(cFirstName);
+            custCustomer.run('$lastName')(cLastName);
+            custCustomer.run('$email')(cEmail);
+            custCustomer.run('$customerNumber')(cCustomerNumber);
+            alert("You Entered: \nName: " + custCustomer.run('firstName') + " " + custCustomer.run('lastName') + "\nEmail: " + custCustomer.run('email')
+            + "\nCustomer Number: " + custCustomer.run('customerNumber'));
+
+            $("#cFirstName").val("");
+            $("#cLastName").val("");
+            $("#cEmail").val("");
+            $("#cCustomerNumber").val("");
+
+
+        }
+
+
+
+
+    })
+    $("#createEmployee").click(function() {
+        var eFirstName = $("#eFirstName").val();
+        var eLastName = $("#eLastName").val();
+        var eEmail = $("#eEmail").val();
+        var ssn = $("#ssn").val();
+
+        var isValid = true;
+
+        // validate the first name
+        if (eFirstName == "") {
+            $("#eFirstNameError").text("This field is required.");
+            isValid = false;
+        } else {
+            $("#eFirstNameError").text("*");
+        }
+
+        // validate the last Name
+        if (eLastName == "") {
+            $("#eLastNameError").text("This field is required.");
+            isValid = false;
+        } else {
+            $("#eLastNameError").text("*");
+        }
+
+        // validate the email
+        if (eEmail == "") {
+            $("#eEmailError").text("This field is required.");
+            isValid = false;
+        }
+        else {
+            $("#eEmailError").text("*");
+        }
+        // validate the ssn
+        if (ssn == "" ) {
+            $("#ssnError").text("This field is required.");
+            isValid = false;
+        }
+        else {
+            $("#ssnError").text("*");
+        }
+
+
+
+
+
+
+        if (isValid == true) {
+            var empEmployee = Object.create(employee)
+            empEmployee.run('$firstName')(eFirstName);
+            empEmployee.run('$lastName')(eLastName);
+            empEmployee.run('$email')(eEmail);
+            empEmployee.run('$ssn')(ssn);
+            alert("You Entered: \nName: " + empEmployee.run('firstName') + " " + empEmployee.run('lastName') + "\nEmail: " + empEmployee.run('email')
+                + "\nSocial Security Number: " + empEmployee.run('ssn'));
+
+            //Clear Inputs
+            $("#eFirstName").val("");
+            $("#eLastName").val("");
+            $("#eEmail").val("");
+            $("#ssn").val("");
+
+
         }
 
     })
