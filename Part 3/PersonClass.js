@@ -8,12 +8,13 @@ var person = function(){
         $firstName: function(n){
             data.memo += 1; // This, and the object entry "memo: 0" below is an example of Memoization where a function can
                             // keep track of some prior behavior.
-            data.name = n },
+            data.firstName = n },
         memo: 0,
         lastName: null,
-        $lastName: function(n){data.memo += 1; data.dob = n},
+        $lastName: function(n){data.memo += 1; data.lastName = n},
         email: null,
-        $email: function(n){data.memo += 1; data.quality = n}
+        $email: function(n){data.memo += 1; data.email = n},
+        $toString: function(){return "name:" +firstName + " " + lastName +"\n" + "email:" + email;}
     };
 
     var F = function(){};
@@ -36,8 +37,9 @@ var customer = function(p){
     // private data
     var data = {
         customerNumber:0,
-        $cusomterNumber: function(n){data.memo += 1; data.name = n},
+        $cusomterNumber: function(n){data.memo += 1; data.customerNumber = n},
         memo: 0,
+        $getDisplayText: function() { return this.$toString() + "\nCustomerNumber: " + customerNumber;}
 
     };
 
@@ -60,8 +62,9 @@ var employee = function(p){
     // private data
     var data = {
         ssn: 0,
-        $ssn: function(n){data.memo += 1; data.name = n},
+        $ssn: function(n){data.memo += 1; data.ssn = n},
         memo: 0,
+        $getDisplayText: function() { return this.$toString() + "\nCustomerNumber: " + ssn;}
 
     };
 
@@ -79,3 +82,21 @@ var employee = function(p){
 
     return f;
 }(person);
+
+var a1 = Object.create(customer);
+
+document.writeln(Object.getPrototypeOf(a1) + "<BR>");
+document.writeln(a1.pname + "<BR>");
+document.writeln(a1.run('customerNumber') + "<BR>");
+a1.run('$customerNumber')('50');
+document.writeln(a1.run('customerNumber'));
+
+
+
+
+
+
+
+
+
+
