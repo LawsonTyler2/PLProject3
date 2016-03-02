@@ -37,7 +37,7 @@ var customer = function(p){
     // private data
     var data = {
         customerNumber:0,
-        $cusomterNumber: function(n){data.memo += 1; data.customerNumber = n},
+        $customerNumber: function(n){data.memo += 1; data.customerNumber = n},
         memo: 0,
         $getDisplayText: function() { return this.$toString() + "\nCustomerNumber: " + customerNumber;}
 
@@ -83,13 +83,33 @@ var employee = function(p){
     return f;
 }(person);
 
-var a1 = Object.create(customer);
+$(document).ready(function() {
+    //When start creating button is clicked, determine whether to create customer or employee
+    $("#create_person").click(function(){
+        if($("#create_type").val() == "c" ){
+            $("#customer").toggleClass("hide");
+            if ( $("#employee").hasClass("hide") != true){
+                $("#employee").toggleClass("hide");
+            }
 
-document.writeln(Object.getPrototypeOf(a1) + "<BR>");
-document.writeln(a1.pname + "<BR>");
-document.writeln(a1.run('customerNumber') + "<BR>");
-a1.run('$customerNumber')('50');
-document.writeln(a1.run('customerNumber'));
+            $("#customer_typeError").text("*");
+
+        }
+        else if($("#create_type").val() == "e" ){
+            $("#employee").toggleClass("hide");
+            if ( $("#customer").hasClass("hide") != true){
+                $("#customer").toggleClass("hide");
+            }
+
+            $("#customer_typeError").text("*");
+
+        }
+        else {
+            $("#customer_typeError").text("This field is required.");
+        }
+
+    })
+})
 
 
 

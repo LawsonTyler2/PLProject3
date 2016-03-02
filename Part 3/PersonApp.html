@@ -4,9 +4,61 @@
     <meta charset="UTF-8">
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="PersonClass.js"></script>
+    <link rel="stylesheet" href="main.css">
     <title>PersonApp</title>
 </head>
 <body>
+<h1>Welcome to the Person Tester application</h1>
+<div id="customer/employee">
+    <label for="create_type">Customer or Employee (c or e)</label>
+    <input type="text" id="create_type">
+    <span id="customer_typeError">*</span><br>
+
+    <label>&nbsp;</label>
+    <input type="button" id="create_person" value="Start creating"><br>
+</div>
+<div id="customer" class = "hide">
+    <label for="cFirstName">Enter First Name:</label>
+    <input type="text" id="cFirstName">
+    <span id="cFirstNameError">*</span><br>
+
+    <label for="cLastName">Enter Last Name:</label>
+    <input type="text" id="cLastName">
+    <span id="cLastNameError">*</span><br>
+
+    <label for="cEmail">Enter Email Address:</label>
+    <input type="text" id="cEmail">
+    <span id="cEmailError">*</span><br>
+
+    <label for="cCustomerNumber">Enter Customer Number:</label>
+    <input type="text" id="cCustomerNumber">
+    <span id="cCustomerNumberError">*</span><br>
+
+
+
+    <label>&nbsp;</label>
+    <input type="button" id="createCustomer" value="Create Customer"><br>
+</div>
+<div id="employee" class = "hide">
+    <label for="eFirstName">Enter First Name:</label>
+    <input type="text" id="eFirstName">
+    <span id="eFirstNameError">*</span><br>
+
+    <label for="eLastName">Enter Last Name:</label>
+    <input type="text" id="eLastName">
+    <span id="eLastNameError">*</span><br>
+
+    <label for="eEmail">Enter Email Address:</label>
+    <input type="text" id="eEmail">
+    <span id="eEmailError">*</span><br>
+
+    <label for="ssn">Enter Social Security Number:</label>
+    <input type="text" id="ssn">
+    <span id="ssnError">*</span><br>
+
+    <label>&nbsp;</label>
+    <input type="button" id="goodbye" value="Create Employee"><br>
+</div>
 
 </body>
 </html>;
